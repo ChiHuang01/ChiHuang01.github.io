@@ -121,7 +121,7 @@ body {
 	grid-template-rows: auto;
 	grid-column-gap: 10px;
 	grid-row-gap: 20px;
-	padding: 50px;
+	/*padding: 50px;*/
 }
 .productName{
 	font-size: 30pt;

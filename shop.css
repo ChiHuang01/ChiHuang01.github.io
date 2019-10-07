@@ -115,6 +115,7 @@ body {
 
 .grid-items {
 /*	position: absolute;*/
+	max-width: 85%;
 }
 
 .productimage {

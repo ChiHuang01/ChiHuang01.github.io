@@ -1,0 +1,248 @@
+/* for body as container*/
+.container {
+  display: grid;
+  grid-template-columns: [first] 1fr [end]; /*my whole webpage has one column only*/
+  grid-template-rows: [row1-start] 140px [row1-end row2-start] 400px [row2-end row3-start] 260px [row3-end]; /*This means that I have three rows, each with the appropriate px. This adds up to 800 px, which is the HEIGHT of a 13in Macbook */ 
+/*  align-items: center;*/
+  background-color: rgba(100, 100, 100, 1);
+  font-family: Helvetica;
+	
+}
+
+
+/*navigation bar styling*/
+.navbar {	
+	display: grid; /*making navbar parent grid for navbar-part-left*/ 
+	grid-template-columns: [first]120px [line2] 800px [line3] 120px [line4]; /*Same could be written as following:[first]256px [col1-end col2-start] 1408px [col2-end col3-start] 896px [col3-end]*/ /*grid-template-columns are referring to parent, and grid-column-start is referring to the child*/
+	grid-template-rows: [row1-start] 120px [row1-end];
+	grid-column-start: 1;
+	grid-column-end: 2;
+	grid-row-start: 1; 
+	grid-row-end: 2;
+	background-color: #FFE4B2; 
+	border-bottom: 3px solid #CC8400;
+}
+
+.navbar-part-left {
+	grid-column-start: 1;
+	grid-column-end: 2;
+	display: flex; 
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: center;
+	/*grid-row-start: 1;
+	grid-row-start: 2;*/	/*There is only one row in the parent grid (navbar), hence CSS might have gotten confused so we just eliminate the row because it's redundant*/
+	
+}
+
+
+.navbar-part-middle {
+	grid-column-start: 2;
+	grid-column-end: 3;
+	justify-self: center;
+	font-size: 30px;
+}
+
+.navbar-part-right {
+	grid-column-start: 3;
+	grid-column-end: 4;	
+	display: flex; 
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: center;
+	size: 20px; 	
+}
+
+.back {
+	padding-top: 10px;
+	padding-bottom: 10px;
+	padding-left: 20px;
+	padding-right: 0px;
+	display: flex; 
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: center;
+}
+
+.account{
+	padding-top: 10px;
+	padding-bottom: 0px;
+	padding-left: 20px;
+	padding-right: 20px;
+	border-style: solid;
+	display: flex; 
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: center;
+}
+
+
+.shopping_bag_content{
+	display: grid; 
+	grid-template-columns: [first] 91px [line2] 91px [line3] 91px [line4] 91px [line5] 91px [line6] 91px [line7] 91px [line8] 91px [line9] 91px [line10] 91px [line11] 91px [line12] 91px [line13] 91px [line14];	
+	grid-template-rows: [row1-start] 44px [row1-end row2-start] 44px [row2-end row3-start] 44px [row3-end row4-start] 44px [row4-end row5-start] 44px [row5-end row6-start] 44px [row6-end row7-start] 44px [row7-end row8-start] 44px [row8-start row9-end];
+	grid-column-start: 1;
+	grid-column-end: 2;
+	grid-row-start: 2; 
+	grid-row-end: 3;
+	background-color: #ffffff;
+	border-bottom: 3px solid #CC8400;
+}
+
+.shopping_bag {
+	grid-column-start: 2;
+	grid-column-end: 7;
+	grid-column-end: 4;
+	grid-row-start: 1; 
+	grid-row-end: 2;
+	font-size: 25px;
+}
+
+.shopping_bag_item {
+	grid-column: span 4;
+	
+}
+
+
+.pic {
+	grid-column-start: 3;
+	grid-column-end: 6;
+	grid-row-start: 3; 
+	grid-row-end: 6;
+	display: flex; 
+}
+/*
+.img {
+	float: left;
+}
+*/
+
+
+
+/*
+.original_cinnamon_pic {
+	grid-column-start: 3;
+	grid-column-end: 6;
+	grid-row-start: 3; 
+	grid-row-end: 6;
+}
+*/
+
+.flavor {
+	grid-column-start: 7;
+	grid-column-end: 9;
+	grid-row-start: 3; 
+	grid-row-end: 4;
+	font-size: 20px;
+}
+
+.glazing {
+	grid-column-start: 7;
+	grid-column-end: 9;
+	grid-row-start: 4; 
+	grid-row-end: 6;
+	font-size: 20px;
+}
+
+.quantity {
+	grid-column-start: 10;
+	grid-column-end: 11;
+	grid-row-start: 3; 
+	grid-row-end: 4;
+	font-size: 18px;
+}
+
+.price {
+	grid-column-start: 12;
+	grid-column-end: 13;
+	grid-row-start: 3; 
+	grid-row-end: 4;
+	font-size: 18px;
+	
+}
+
+.remove {
+	grid-column-start: 7;
+	grid-column-end: 8;
+	grid-row-start: 7; 
+	grid-row-end: 8;
+	font-size: 20px;
+	color: #706B6B;
+	
+}
+
+
+.save_for_later {
+	grid-column-start: 8;
+	grid-column-end: 10;
+	grid-row-start: 7; 
+	grid-row-end: 8;
+	font-size: 20px;
+	color: #706B6B;
+}
+
+#shopping_list {
+	background-color: white;
+}
+
+.cost_and_contact {
+	display: grid; 
+	grid-template-columns: [first] 91px [line2] 91px [line3] 91px [line4] 91px [line5] 91px [line6] 91px [line7] 91px [line8] 91px [line9] 91px [line10] 91px [line11] 91px [line12] 91px [line13] 91px [line14];	
+	grid-template-rows: [row1-start] 35px [row1-end row2-start] 35px [row2-end row3-start] 35px [row3-end row4-start] 35px [row4-end row5-start] 35px [row5-end row6-start] 35px [row6-end row7-start] 35px [row7-end row8-start] 35px [row8-start row9-end];
+	grid-column-start: 1;
+	grid-column-end: 2;
+	grid-row-start: 3; 
+	grid-row-end: 4;
+	background-color: #ffffff;
+	
+}
+
+.question {
+	grid-column-start: 2;
+	grid-column-end: 6;
+	grid-row-start: 2; 
+	grid-row-end: 3;
+	font-size: 18px;
+	
+}
+
+.subtotal {
+	grid-column-start: 10;
+	grid-column-end: 13;
+	grid-row-start: 3; 
+	grid-row-end: 4;
+	font-size: 20px;
+	
+}
+
+.shipping_cost {
+	grid-column-start: 10;
+	grid-column-end: 13;
+	grid-row-start: 4; 
+	grid-row-end: 5;
+	font-size: 20px;
+	
+}
+
+.estimated_tax {
+	grid-column-start: 10;
+	grid-column-end: 13;
+	grid-row-start: 5; 
+	grid-row-end: 6;
+	font-size: 20px;
+	border-bottom: 3px solid #CC8400;
+}
+
+.estimated_total {
+	grid-column-start: 10;
+	grid-column-end: 13;
+	grid-row-start: 7; 
+	grid-row-end: 8;
+	font-size: 25px;
+}
+
+.wishlist{
+	background-color: #ffffff;
+	border-bottom: 3px solid #CC8400;
+}
+

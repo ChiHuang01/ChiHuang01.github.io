@@ -4,7 +4,6 @@
 
 var w  = 0;
 var z = 0;
-
 var bunquantity=0;
 var glazingselection = document.getElementById("btn-none").addEventListener("click", changeNone )
 var glazingselection = document.getElementById("btn-sugar-milk").addEventListener("click", changeSugarMilk )
@@ -12,8 +11,11 @@ var glazingselection = document.getElementById("btn-vanilla-milk").addEventListe
 var glazingselection = document.getElementById("btn-double-chocolate").addEventListener("click", changeDoubleChocolate )
 var wishlist = document.getElementById("wishlist")
 var productName = document.getElementById("productName")
-var cartProducts = JSON.parse( localStorage.getItem( "cartProducts" ) );
-var wishlistProducts = JSON.parse( localStorage.getItem( "wishlistProducts" ) );
+var cartProducts = JSON.parse( sessionStorage.getItem( "cartProducts" ) ); //JSON formats my data into objects, so that it's easier to access the attributes in the data to manipulate them. 
+//( localStorage.getItem( "cartProducts" ) = we're going to the local storage to get a variable called cartProducts
+//cartProducts = sessionStorage.getItem( "cartProducts" );
+console.log("initial cart: " + cartProducts);
+var wishlistProducts = JSON.parse( sessionStorage.getItem( "wishlistProducts" ) );
 
 wishlist.addEventListener("click", function(){
   
@@ -24,11 +26,16 @@ wishlist.addEventListener("click", function(){
 
       if(wishlistProducts.hasOwnProperty( selectedGlazing.innerHTML ) == true ) {
         wishlistProducts[ selectedGlazing.innerHTML ].quantity += bunquantity;
+		wishlistProducts[selectedGlazing.innerHTML].price += 5*bunquantity;
       } else {
-        wishlistProducts[ selectedGlazing.innerHTML ] = { quantity: bunquantity };
+        wishlistProducts[ selectedGlazing.innerHTML ] = { quantity: bunquantity,
+														price: 5*bunquantity
+														}; 
+		  //{ quantity: bunquantity } is an object and this is saying that quantity = bunquantity 
       }
 
-      localStorage.setItem( "wishlistProducts", JSON.stringify( wishlistProducts ) );
+      sessionStorage.setItem( "wishlistProducts", JSON.stringify( wishlistProducts ) ); 
+	//JSON sets everything into object (JSON.parse). JSON.stringify sets an object into string 
 })
 
 
@@ -107,6 +114,7 @@ if(! count){
 
 function CumulativeCount () {
   	var selectedGlazing = document.querySelector( ".grid-container-glazing .selected" );
+	console.log("selectedGlazing: " + selectedGlazing.innerHTML);
 	var w = document.getElementById("cart-number");
 	w.innerHTML = "(" + bunquantity + ")";
 
@@ -119,15 +127,21 @@ function CumulativeCount () {
     if( cartProducts == null ) {
       cartProducts = { };
     }
-	
-    if(cartProducts.hasOwnProperty( selectedGlazing.innerHTML ) == true ) {
-      cartProducts[ selectedGlazing.innerHTML ].quantity += bunquantity;
+	bunquantity = parseInt(bunquantity);
+	console.log(cartProducts[selectedGlazing.innerHTML]);
+    if(cartProducts[selectedGlazing.innerHTML] != null ) {
+      cartProducts[selectedGlazing.innerHTML ].quantity += bunquantity;
+		cartProducts[selectedGlazing.innerHTML].price += (5*bunquantity);
+		cartProducts[selectedGlazing.innerHTML].tax += (0.1*5*bunquantity);
     } else {
-      cartProducts[ selectedGlazing.innerHTML ] = { quantity: bunquantity };
+      cartProducts[ selectedGlazing.innerHTML ] = { quantity: bunquantity, price: 5*bunquantity, tax: 0.5*bunquantity };
+		console.log("cart added " + cartProducts[selectedGlazing.innerHTML] );
     }
     
   	// TODO: Add to the cart
-  	localStorage.setItem( "cartProducts", JSON.stringify( cartProducts ) );
+	console.log(cartProducts);
+
+  	sessionStorage.setItem( "cartProducts", JSON.stringify( cartProducts ) );
 }
     
 

@@ -7,12 +7,15 @@
 
 var wishlist = document.getElementById( "wishlist" );
 var shopping_bag_content = document.getElementById( "shopping_bag_content" );
-var cartProducts = null;
+cartProducts = null;
 var wishListProducts = null;
+document.getElementsByClassName("back").onclick = function(){
+	sessionStorage.setItem("cartProducts", JSON.stringify(cartProducts));
+}
 
 
-if( localStorage.getItem( "wishlistProducts" ) != null ){
-  wishListProducts = JSON.parse( localStorage.getItem( "wishlistProducts" ) );
+if( sessionStorage.getItem( "wishlistProducts" ) != null ){
+  wishListProducts = JSON.parse( sessionStorage.getItem( "wishlistProducts" ) );
   
   var keys = Object.getOwnPropertyNames( wishListProducts );
   
@@ -32,15 +35,17 @@ if( localStorage.getItem( "wishlistProducts" ) != null ){
 
 
 
-if( localStorage.getItem( "cartProducts" ) != null ){
-  cartProducts = JSON.parse( localStorage.getItem( "cartProducts" ) );
-  
+if( sessionStorage.getItem( "cartProducts" ) != null ){
+  cartProducts = JSON.parse( sessionStorage.getItem( "cartProducts" ) );
+  updateCostAndContact(cartProducts);
   var keys = Object.getOwnPropertyNames( cartProducts );
-  
+	console.log("keys = " + keys);
+  //getOwnPropertyNames will return an array, which is what we want because an array can be accessed one by one to find the item that we want, and any types of collection (e.g., an array, an object) allow you to do that. 
+	var counter=1;
   for( var key of keys ) {
-    
+    console.log(cartProducts[key]);
     shopping_bag_content.innerHTML += `
-      <div class="shopping_bag_item">
+      <div class="shopping_bag_item" style="">
         <div class="pic"> 
             <a href="product_detail.html"><img class="original_cinamon_pic" src="img/original.jpg" style="width:310px; height:200px" alt: "Original_Cinnamon_Picture"/></a>
         </div>
@@ -48,28 +53,47 @@ if( localStorage.getItem( "cartProducts" ) != null ){
         <div class="flavor">Original</div>
         <div class="glazing">Glazing: ${key}</div>
         <div class="quantity">Qty: ${cartProducts[key].quantity} rolls</div>
-        <div class="price">$${cartProducts[key].quantity * 5}</div>
+        <div class="price">$${cartProducts[key].price}</div>
         <button class="remove" onclick='removeProductFromCart("${key}")'>Remove</button>
         <button class="save_for_later">Save for Later</button>
       </div>
     `;
-    
+    counter++;
+	  if(counter%3==0){
+		  shopping_bag_content.innerHTML += '';
+	  }
   }
 }
 
 
-function removeProductFromCart( productKey ){
+function removeProductFromCart( productKey ){ //so the main purpose of this function is to define removeProductFromCart and what it consists of, so that we could use removeProductFromCart in other places. 
     var productElement = event.currentTarget.parentElement;
     productElement.parentElement.removeChild( productElement );
   	alert( productKey );
     delete cartProducts[ productKey ];
-    localStorage.setItem( "cartProducts", JSON.stringify( cartProducts ) );
+    sessionStorage.setItem( "cartProducts", JSON.stringify( cartProducts ) );
+	updateCostAndContact(cartProducts);
+} //this whole thing is called a definition of (it's a definition of removeProductFromCart( productKey ). And everything after the { is describing what the definition is. ( productKey ) is called a parameter, which is also known as an agrument (parameter and argrument are the same thing). 
+//I can name (productKey) whatever I want, it's just so that the content of the definition could refer back to the variable name.  
+
+function updateCostAndContact(cartProducts){
+	var sub = 0;
+	var tax = 0;
+	var total = 0;
+	for (var product in cartProducts){
+		console.log(cartProducts[product]);
+		sub += cartProducts[product].price;
+	}
+	tax = sub*0.1;
+	total = sub+tax;
+	document.getElementById("cart_subtotal").innerHTML= sub;
+	document.getElementById("cart_tax").innerHTML=tax;
+	document.getElementById("cart_total").innerHTML=total;
 }
 
 
-
-//if( localStorage.getItem( "cartProducts" ) != null ){
-//  var cartProducts = localStorage.getItem( "cartProducts" );
+//if( sessionStorage.getItem( "cartProducts" ) != null ){
+//  var cartProducts = sessionStorage.getItem( "cartProducts" );
 //  
 //  var keys = Object.keys( cartProducts );
 //  
@@ -114,7 +138,7 @@ function removeProductFromCart( productKey ){
 //// 3. Allow displaying multiple products in the cart and wishlist
 //// 4. Add more details to the wishlist
 //
-//cartProducts = JSON.parse( localStorage.getItem( "cartProducts" ) );
+//cartProducts = JSON.parse( sessionStorage.getItem( "cartProducts" ) );
 //
 //function CumulativeCount () {
 //	count++;
@@ -139,7 +163,7 @@ function removeProductFromCart( productKey ){
 //    }
 //    
 //  	// TODO: Add to the cart
-//  	localStorage.setItem( "cartProducts", JSON.stringify( cartProducts ) );
+//  	sessionStorage.setItem( "cartProducts", JSON.stringify( cartProducts ) );
 //}
 //
 //
@@ -172,9 +196,9 @@ function removeProductFromCart( productKey ){
 //
 //
 //
-//if( localStorage.getItem( "cartProducts" ) != null ){
+//if( sessionStorage.getItem( "cartProducts" ) != null ){
 //  console.log(cartProducts);
-////  var cartProducts = localStorage.getItem( "cartProducts" );
+////  var cartProducts = sessionStorage.getItem( "cartProducts" );
 //
 //	//make sure I get the correct array (for loop)
 //  var keys = Object.keys( cartProducts ); 

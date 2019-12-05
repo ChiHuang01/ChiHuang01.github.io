@@ -85,47 +85,87 @@
 // })
 
 
-function makeplot() {
-  
-  Plotly.d3.csv("https://raw.githubusercontent.com/ChiHuang01/ChiHuang01.github.io/master/PUI%20Final%20Website/data/pui_website_data.csv", function(data){
-    processData(data) } );
-};
+Plotly.d3.csv("https://raw.githubusercontent.com/ChiHuang01/ChiHuang01.github.io/master/PUI%20Final%20Website/data/pui_website_data.csv", function(err, rows){
 
-function processData(allRows) {
-    
-    console.log(allRows); 
-
-  var column_country = allRows.map(function(row) { return row["Country"]; })
-  console.log(column_country);
-
-  var column_harvest = allRows.map(function(row) { return row["Pounds/Hectare"]; })
-  console.log(column_harvest);
-  
-  var data = [
-    {
-      x: column_country,
-      y: column_harvest,
-      type: 'bar',
-      marker: {color: 'rgb(237, 159, 189)', opacity: 0.5},
-      name: 'Harvest in Pound/Hectare'
-      }
-  ];
-  
-  var layout = {
-      showlegend: true,
-      xaxis: {
-      //tickangle: -45
-      },
-      yaxis: {
-      zeroline: false,
-      gridwidth: 2
-      },
-      bargap :0.1
-  };
-
-  
-  Plotly.newPlot('myDiv', data, layout);
-  
+  function unpack(rows, key) {
+  return rows.map(function(row) { return row[key]; });
 }
 
-makeplot();
+  var frames = []
+  var x = unpack(rows, 'year')
+  var y = unpack(rows, 'numberofpeople')
+
+  var n = 100;
+  for (var i = 0; i < n; i++) {
+    frames[i] = {data: [{x: [], y: []}]}
+    frames[i].data[0].x = x.slice(0, i+1);
+    frames[i].data[0].y = y.slice(0, i+1);
+  }
+
+  Plotly.plot('myDiv', [{
+    x: frames[1].data[0].x,
+    y: frames[1].data[0].y,
+    fill: 'tozeroy',
+    type: 'scatter',
+    mode: 'lines',
+    line: {color: 'green'}
+  }], {
+    title: "Filled-Area Animation",
+    xaxis: {
+      type: 'date',
+      range: [
+        frames[99].data[0].x[0],
+        frames[99].data[0].x[99]
+      ]
+    },
+    yaxis: {
+      range: [
+        0,
+        90
+      ]
+    },
+    updatemenus: [{
+      x: 0.1,
+      y: 0,
+      yanchor: "top",
+      xanchor: "right",
+      showactive: false,
+      direction: "left",
+      type: "buttons",
+      pad: {"t": 87, "r": 10},
+      buttons: [{
+        method: "animate",
+        args: [null, {
+          fromcurrent: true,
+          transition: {
+            duration: 0,
+          },
+          frame: {
+            duration: 40,
+            redraw: false
+          }
+        }],
+        label: "Play"
+      }, {
+        method: "animate",
+        args: [
+          [null],
+          {
+            mode: "immediate",
+            transition: {
+              duration: 0
+            },
+            frame: {
+              duration: 0,
+              redraw: false
+            }
+          }
+        ],
+        label: "Pause"
+      }]
+    }]
+  }).then(function() {
+    Plotly.addFrames('myDiv', frames);
+  });
+
+})

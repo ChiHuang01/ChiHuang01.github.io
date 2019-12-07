@@ -17,6 +17,7 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<link href="https://fonts.googleapis.com/css?family=Raleway:200,100,400" rel="stylesheet" type="text/css" />
 	<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
 
 <!-- 
 	Below is the library for "Hi there" 
@@ -25,6 +26,19 @@
 </head>
 
 <body>
+
+	<!-- This would be the first thing people see--shocking statistics -->
+	<div class="masthead">
+		<!-- <h1 class="ml3" style="text-align: center">Hi there</h1> -->
+		<h1 class="doyouknow"  style="text-align: center">Do you know that...
+	  <span
+	     class="txt-rotate"
+	     data-period="2000"
+	     data-rotate='[ "over half a million of Americans are homeless.", "35% of them are on the streets.", "59% of them are underaged.", "their mortality rate is 4-9 times higher." ]'></span>
+</h1>
+	</div>
+
+
 	<div id="container">
 		<div id="myDiv"></div>
 	
@@ -42,48 +56,38 @@
 
 <!-- <link href="https://fonts.googleapis.com/css?family=Raleway:200,100,400" rel="stylesheet" type="text/css" /> -->
 
-<!-- This would be the first thing people see--shocking statistics -->
-<h1 class="ml3">Hi there</h1>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
-
-
-<h1 class="doyouknow">Do you know that...
-	  <span
-	     class="txt-rotate"
-	     data-period="2000"
-	     data-rotate='[ "over half a million of Americans are homeless.", "35% of them are on the streets.", "59% of them are underaged.", "their mortality rate is 4-9 times higher." ]'></span>
-</h1>
-
  
 
 <!-- Here starts the animation of the homeless person's story -->
-<div class="frame1">
-	<p> At the age of 8, I was brought to a foster home in Ohio.</p>
-	<img src="./Assets/SVG/frame1.svg">
-</div>
+	<div class="frame3">
+		<div class="frame3_text"><p> At the age of 8, I was brought to a foster home in Ohio.</p></div>
+		<img src="./Assets/SVG/frame1.svg" width="auto" height="auto">
+	</div>
 		
 <div class="frame2">
-	<p>It was a crippling experience. I desparately wanted to leave.</p>
-	<img src="./Assets/SVG/frame2.svg" width="1000px" height="1000px">
+	<div class="frame2_text"><p>It was a crippling experience. I desparately wanted to leave.</p></div>
+	<img src="./Assets/SVG/frame2.svg" width="auto" height="auto">
 </div>
 	
 <div class="frame3">
-	<p>The day that I turned 18, I finished the paperwork to leave foster care and quit school. The day after I quitted, I got a job at McDonalds></p>
-	<img src="./Assets/SVG/frame3.svg">
+	<p>The day that I turned 18, I finished the paperwork to leave foster care and quit school. The day after I quitted, I got a job at McDonalds</p>
+	<img src="./Assets/SVG/frame3.svg" width="auto" height="auto">
 </div>
 	
 	<div class="frame4_part1">
-		<p>I came to Pittsburgh 20 days ago for a better life.</p><img src="./Assets/SVG/frame4_p1.svg">
+		<div class="frame4_part1_text"><p>I came to Pittsburgh 20 days ago for a better life. I've already applied to multiple jobs-UPMC, Giant Eagles, and etc. Now, I'm just short of $60 to get my ID in order to be hired.</p></div><img src="./Assets/SVG/frame4_p1.svg" width="auto" height="500px">
 	</div>
 
 	<div class="frame4_part2">
-		<p>When I go to the shelter, it's always full. I would just sleep on the sidewalk.<img src="./Assets/SVG/frame4_part2.svg">
-
-	<div class="frame5">
-		<p>But I'm ready for a big leap. I have my work shoes and clothes prepared.<img src="./Assets/SVG/frame5.svg">
+		<div class="frame4_part2_text"><p>When I go to the shelter, it's always full. I would just sleep on the sidewalk.</p></div><img src="./Assets/SVG/frame4_part2.svg" width="auto" height="auto">
 	</div>
 
-	<div class="frame6" src="./Assets/SVG/frame6.svg">
+	<div class="frame5">
+		<div class="frame5_text"><p>But I'm ready for a big leap. I have my work shoes and clothes prepared.</p></div><img src="./Assets/SVG/frame5.svg" width="auto" height="auto">
+	</div>
+
+	<div class="frame6">
+		<img src="./Assets/SVG/frame6.svg" width="auto" height="auto">
 	</div>
 
 

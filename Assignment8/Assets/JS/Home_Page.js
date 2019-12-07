@@ -87,8 +87,6 @@ TxtRotate.prototype.tick = function() {
 
 
 ///*this makes it so that once the page is loaded, the text starts playing*///
-
-  
   function start() {
   var elements = document.getElementsByClassName('txt-rotate');
   for (var i=0; i<elements.length; i++) {
@@ -126,7 +124,7 @@ function isElementInViewport(elem) {
     return ((elemTop < viewportBottom) && (elemBottom > viewportTop));
 }
 
-// Check if it's time to start the animation.
+///***Check if it's time to start the animation.***///
 function checkAnimation() {
     var $elem = $('.animated-image');
 

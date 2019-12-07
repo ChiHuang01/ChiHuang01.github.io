@@ -119,14 +119,21 @@
   grid-column-gap: 50px;
 }*/
 
+.masthead {
+  height: 100vh !important;
+  margin: 0 auto;
+}
 
+.masthead h1 {
+  text-align: center !important;
+}
 
 .doyouknow {
   font-weight: 900;
   font-size: 3.5em;
   margin: 0; 
   padding: 0; 
-  text-align: center; 
+  text-align: center !important; 
   position: absolute;
   top: 50%;
   left: 50%; 
